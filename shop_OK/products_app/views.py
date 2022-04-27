@@ -24,3 +24,10 @@ def product_list(request):
                   {'category': category,
                    'categories': categories,
                    'products': products})
+
+def product_detail(request, pk):
+    product = Product.objects.filter(available=True, pk=pk)
+
+    return render(request,
+                  'product_detail.html',
+                  {'product': product})
