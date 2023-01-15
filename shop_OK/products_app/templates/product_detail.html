@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ block.super }} : {{product.name}}
+{% endblock %}
+{% block content %}
+    <!-- Page Content -->
+    <!-- Items Starts Here -->
+    <div class="featured-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="featured container no-gutter">
+        <div class="row posts">
+            <div id="1" class="item new col-md-4">
+              <a href="single-product.html">
+                <div class="featured-item">
+                  <img src="{% if product.photo %}{{ product.photo.url }}{% endif %}">
+                  <h3>{{product.name}}  {{product.price}} руб.</h3>
+                </div>
+              </a>
+            </div>
+          <div class="col-md-8 col-sm-12">
+            <h4>Описание товара</h4>
+          {{ product.description }}
+          </div>
+<form action="{% url 'cart_add' product.id %}" method="post">
+    {{ cart_product_form }}
+    {% csrf_token %}
+    <input type="submit" value="в корзину">
+</form>
+    </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ block.super }} : Товары
+{% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% block content %}
+  <body>
+    <!-- Page Content -->
+    <!-- Items Starts Here -->
+    <div class="featured-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-sm-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+
+              </a>
+            </div>
+          </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="featured container no-gutter">
+
+        <div class="row posts">
+          {% for i in products %}
+            <div id="1" class="item new col-md-4">
+              <a href="{{ i.get_absolute_url }}">
+                <div class="featured-item">
+                  <img src="{% if i.photo %}{{ i.photo.url }}{% endif %}">
+                  <h3>{{i.name}} | {{i.price}} руб.</h3>
+                  <u><a href="#">{{ i.category }}</a></u>
+                </div>
+              </a>
+            </div>
+
+          {% endfor %}
+    </div>
+
+    <div class="page-navigation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ul>
+              {% if page_obj.has_other_pages %}
+              {% if page_obj.has_previous %}
+              <li><a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a></li>
+              {% endif %}
+              {% for p in page_obj.paginator.page_range %}
+              {% if page_obj.number == p %}
+              <li class="current-page"><a href="?page={{ p }}">{{ p }}</a></li>
+              {% else %}
+              <li><a href="?page={{ p }}">{{ p }}</a></li>
+              {% endif %}
+              {% endfor %}
+              {% if page_obj.has_next %}
+              <li><a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a></li>
+              {% endif %}
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

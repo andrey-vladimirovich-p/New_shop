@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ block.super }} : Контакты
+{% endblock %}
+{% block content %}
+<!-- Page Content -->
+    <!-- About Page Starts Here -->
+    <div class="contact-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <div class="line-dec"></div>
+              <h1>Контакты</h1>
+              {% if messages %}
+        {% for message in messages %}
+            <div class="container">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div id="map">
+            		<!-- How to change your own map point
+                           1. Go to Google Maps
+                           2. Click on your location point
+                           3. Click "Share" and choose "Embed map" tab
+                           4. Copy only URL and paste it within the src="" field below
+                    -->
+
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2083.367018983686!2d31.274281504036146!3d58.52201591786814!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x2f17f0bec950a533!2zNTjCsDMxJzIxLjYiTiAzMcKwMTYnMzIuOSJF!5e0!3m2!1sru!2sru!4v1663356447267!5m2!1sru!2sru" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="right-content">
+              <div class="container">
+                <form id="contact" action="" method="post">
+                  <div class="row">
+                    {{ form.non_field.errors }}
+                    <div class="col-md-6">
+                      <fieldset>
+                        {% csrf_token %}
+                        {{ form.name }}
+                        {{ form.name.errors }}
+                      </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                      <fieldset>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        {{ form.subject.errors }}
+                        {{ form.subject }}
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        {{ form.content.errors }}
+                        {{ form.content }}
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        {{ form.captcha.errors }}
+                        <label for="{{form.captcha.id_for_label}}">Введите текст с картинки: </label>
+                        {{ form.captcha }}
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="button">Отправить</button>
+                      </fieldset>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="share">
+                        <h6>Вы также можете связаться с нами через соцсети:<span><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i class="fa fa-twitter"></i></a></span></h6>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- About Page Ends Here -->
+{% endblock %}
