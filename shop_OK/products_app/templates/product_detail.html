@@ -19,11 +19,12 @@
     </div>
     <div class="featured container no-gutter">
         <div class="row posts">
+            {% if product.stock > 0 %}
             <div id="1" class="item new col-md-4">
               <a href="single-product.html">
                 <div class="featured-item">
                   <img src="{% if product.photo %}{{ product.photo.url }}{% endif %}">
-                  <h3>{{product.name}}  {{product.price}} руб.</h3>
+                    <h3>{{product.name}}  {{product.price}} руб. <h6>Доступно:{{ product.stock}}шт.</h6></h3>
                 </div>
               </a>
             </div>
@@ -36,6 +37,9 @@
     {% csrf_token %}
     <input type="submit" value="в корзину">
 </form>
+            {% else %}
+            <p>Товар недоступен</p>
+            {% endif %}
     </div>
       </div>
 {% endblock %}

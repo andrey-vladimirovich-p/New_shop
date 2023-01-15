@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import F
 from products_app.models import Product
 
 
@@ -36,3 +37,6 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
+
+
+

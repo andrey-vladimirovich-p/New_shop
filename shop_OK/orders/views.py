@@ -1,7 +1,9 @@
+from django.db.models import F
 from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCreateForm
 from cart.cart import Cart
+from products_app.models import Product
 
 
 def order_create(request):
@@ -15,6 +17,9 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
+                # запрос на обновление количества продуктов в БД
+                Product.objects.filter(pk=item['product'].pk).update(stock=F('stock') - item['quantity'])
+
             # очистка корзины
             cart.clear()
             return render(request, 'orders/order/created.html',
@@ -23,3 +28,5 @@ def order_create(request):
         form = OrderCreateForm
     return render(request, 'orders/order/create.html',
                   {'cart': cart, 'form': form})
+
+
